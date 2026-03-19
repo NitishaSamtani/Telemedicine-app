@@ -60,7 +60,11 @@ export default function Login() {
       } else if (data.user.role === "doctor") {
         navigate("/doctor-dashboard");
       } else if (data.user.role === "admin") {
-        navigate("/admin-dashboard");
+        setTimeout(() => {
+          const redirectURL = `http://localhost:5174/?token=${data.token}&name=${encodeURIComponent(data.user.name)}&role=${data.user.role}`;
+          console.log("🚀 Redirecting to:", redirectURL); // debug
+          window.location.href = redirectURL;
+        }, 100);
       } else {
         navigate("/login");
       }
